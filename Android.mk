@@ -30,7 +30,12 @@ LOCAL_REQUIRED_MODULES := \
 
 LOCAL_MODULE_TARGET_ARCH := arm arm64 mips x86 x86_64
 my_src_arch := $(call get-prebuilt-src-arch,$(LOCAL_MODULE_TARGET_ARCH))
+
+ifneq (,$(findstring hawaii,$(TARGET_BOARD_PLATFORM)))
+LOCAL_SRC_FILES := prebuilt/$(my_src_arch)/webview_hawaii.apk
+else
 LOCAL_SRC_FILES := prebuilt/$(my_src_arch)/webview.apk
+endif
 
 LOCAL_PREBUILT_JNI_LIBS_arm := @lib/armeabi-v7a/libwebviewchromium.so
 LOCAL_PREBUILT_JNI_LIBS_arm64 := @lib/arm64-v8a/libwebviewchromium.so
